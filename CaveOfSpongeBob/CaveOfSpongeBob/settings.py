@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'myAuth',      #自定义的auth
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 自定义用户model
 AUTH_USER_MODEL = 'myAuth.Myuser'
+
+
+# 网站默认设置和上下文信息
+DEFAULT_IMG_LINL = 'http://cdn.stopfollow.com/summary_default.png'
+SITE_END_TITLE = '网站名称待定'
+SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在Python学习、SEO优化、电子商务运营等方面的内容，网站所有文章都是原创。'
+SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,web开发,seo实战'
