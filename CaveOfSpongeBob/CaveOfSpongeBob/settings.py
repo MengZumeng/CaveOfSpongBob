@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',  # 添加人性化过滤器
 
     'myAuth',      #自定义的auth
     'blog',
@@ -138,7 +139,12 @@ AUTH_USER_MODEL = 'myAuth.Myuser'
 
 
 # 网站默认设置和上下文信息
-DEFAULT_IMG_LINL = 'http://cdn.stopfollow.com/summary_default.png'
+DEFAULT_IMG_LINL = 'https://github.com/MengZumeng'
 SITE_END_TITLE = '网站名称待定'
 SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在Python学习、SEO优化、电子商务运营等方面的内容，网站所有文章都是原创。'
 SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,web开发,seo实战'
+
+
+# 统一分页设置
+BASE_PAGE_BY = 2
+BASE_ORPHANS = int((BASE_PAGE_BY + 1) / 2)

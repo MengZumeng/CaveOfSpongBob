@@ -7,6 +7,15 @@ import emoji
 
 # Create your models here.
 
+class TestClass(models.Model):
+    context = models.CharField('测试内容',max_length=200)
+
+    class Meta:
+        verbose_name = '测试类'
+        verbose_name_plural = verbose_name
+        ordering = ['-id']
+
+
 # 文章关键词，用来作为SEO中keywords
 class Keyword(models.Model):
     name = models.CharField('文章关键词', max_length=20)
@@ -34,8 +43,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('blog:tag', kwargs={'slug': self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('blog:tag', kwargs={'slug': self.slug})
 
     def get_article_list(self):
         '''返回当前标签下所有发表的文章列表'''
@@ -56,8 +65,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('blog:category', kwargs={'slug': self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('blog:category', kwargs={'slug': self.slug})
 
     def get_article_list(self):
         return Article.objects.filter(category=self)
@@ -65,7 +74,7 @@ class Category(models.Model):
 # 文章
 class Article(models.Model):
     IMG_LINK = settings.DEFAULT_IMG_LINL
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者',on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者',on_delete=models.SET(''))
     title = models.CharField(max_length=150, verbose_name='文章标题')
     summary = models.TextField('文章摘要', max_length=230, default='文章摘要等同于网页description内容，请务必填写...')
     body = models.TextField(verbose_name='文章内容')
@@ -75,7 +84,7 @@ class Article(models.Model):
     views = models.IntegerField('阅览量', default=0)
     slug = models.SlugField(unique=True)
 
-    category = models.ForeignKey(Category, verbose_name='文章分类',on_delete=models.CASCADE )
+    category = models.ForeignKey(Category, verbose_name='文章分类',on_delete=models.SET(''))
     tags = models.ManyToManyField(Tag, verbose_name='标签')
     keywords = models.ManyToManyField(Keyword,verbose_name='文章关键词',help_text='文章关键词，用来作为SEO中keywords，最好使用长尾词，3-4个足够')
 
@@ -87,8 +96,8 @@ class Article(models.Model):
     def __str__(self):
         return self.title[:20]
 
-    def get_absolute_url(self):
-        return reverse('blog:detail', kwargs={'slug': self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('blog:detail', kwargs={'slug': self.slug})
 
     def body_to_markdown(self):
         return markdown.markdown(self.body, extensions=[
