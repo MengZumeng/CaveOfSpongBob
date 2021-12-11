@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Keyword,Tag,Category,Article,Timeline,Carousel,Silian
+from .models import Keyword,Tag,Category,Article,Timeline,Carousel,Silian,TestClass
 
 admin.site.register(Keyword)
 admin.site.register(Tag)
@@ -10,3 +10,4 @@ admin.site.register(Article)
 admin.site.register(Timeline)
 admin.site.register(Carousel)
 admin.site.register(Silian)
+admin.site.register(TestClass)

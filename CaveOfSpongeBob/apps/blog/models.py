@@ -43,8 +43,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('blog:tag', kwargs={'slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('blog:tag', kwargs={'slug': self.slug})
 
     def get_article_list(self):
         '''返回当前标签下所有发表的文章列表'''
@@ -65,8 +65,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('blog:category', kwargs={'slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('blog:category', kwargs={'slug': self.slug})
 
     def get_article_list(self):
         return Article.objects.filter(category=self)
@@ -96,8 +96,8 @@ class Article(models.Model):
     def __str__(self):
         return self.title[:20]
 
-    # def get_absolute_url(self):
-    #     return reverse('blog:detail', kwargs={'slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'slug': self.slug})
 
     def body_to_markdown(self):
         return markdown.markdown(self.body, extensions=[

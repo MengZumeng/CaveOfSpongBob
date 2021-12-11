@@ -1,7 +1,11 @@
 from .models import Article, Tag, Category, Timeline, Silian,TestClass
 from django.views import generic
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension  # 锚点的拓展
+import markdown
+import time, datetime
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -49,3 +53,57 @@ class DetailView(generic.DetailView):
         obj.body = md.convert(obj.body)
         obj.toc = md.toc
         return obj
+
+class CategoryView(generic.ListView):
+    model = Article
+    template_name = 'blog/category.html'
+    context_object_name = 'articles'
+    paginate_by = getattr(settings, 'BASE_PAGE_BY', None)
+    paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
+
+    def get_ordering(self):
+        ordering = super(CategoryView, self).get_ordering()
+        sort = self.kwargs.get('sort')
+        if sort == 'v':
+            return ('-views', '-update_date', '-id')
+        return ordering
+
+    def get_queryset(self, **kwargs):
+        queryset = super(CategoryView, self).get_queryset()
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+
+        return queryset.filter(category=cate)
+
+    def get_context_data(self, **kwargs):
+        context_data = super(CategoryView, self).get_context_data()
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+        context_data['search_tag'] = '文章分类'
+        context_data['search_instance'] = cate
+        return context_data
+
+
+class TagView(generic.ListView):
+    model = Article
+    template_name = 'blog/tag.html'
+    context_object_name = 'articles'
+    paginate_by = getattr(settings, 'BASE_PAGE_BY', None)
+    paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
+
+    def get_ordering(self):
+        ordering = super(TagView, self).get_ordering()
+        sort = self.kwargs.get('sort')
+        if sort == 'v':
+            return ('-views', '-update_date', '-id')
+        return ordering
+
+    def get_queryset(self, **kwargs):
+        queryset = super(TagView, self).get_queryset()
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('slug'))
+        return queryset.filter(tags=tag)
+
+    def get_context_data(self, **kwargs):
+        context_data = super(TagView, self).get_context_data()
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('slug'))
+        context_data['search_tag'] = '文章标签'
+        context_data['search_instance'] = tag
+        return context_data
