@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',  # 添加人性化过滤器
 
     'myAuth',      #自定义的auth
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'CaveOfSpongeBob.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'blog.context_processors.settings_info',  # 自定义上下文管理器
             ],
         },
     },
@@ -125,7 +129,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' # 别名 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, r'apps\static'),
+)
+
+# 媒体文件收集
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# STATICFILES_DIRS = [(os.path.join(BASE_DIR,'static'))]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -134,3 +147,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 自定义用户model
 AUTH_USER_MODEL = 'myAuth.Myuser'
+
+
+# 网站默认设置和上下文信息
+DEFAULT_IMG_LINL = 'https://github.com/MengZumeng'
+SITE_END_TITLE = '网站名称待定'
+SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在Python学习、SEO优化、电子商务运营等方面的内容，网站所有文章都是原创。'
+SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,web开发,seo实战'
+
+
+# 统一分页设置
+BASE_PAGE_BY = 2
+BASE_ORPHANS = int((BASE_PAGE_BY + 1) / 2)
+
+# 个性化设置，非必要信息
+# 个人 Github 地址
+MY_GITHUB = os.getenv('IZONE_GITHUB', 'https://github.com/MengZumeng')
+MY_CSDN = os.getenv('IZONE_HAO_URL', 'https://blog.csdn.net/weixin_44409075')
