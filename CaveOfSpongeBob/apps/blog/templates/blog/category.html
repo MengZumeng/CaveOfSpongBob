@@ -30,9 +30,7 @@
             {% if is_paginated %}{% load_pages %}{% endif %}
         </div>
         <div class="col-lg-4">
-            <div class="alert alert-primary rounded-0 border-0" role="alert">
-                This is a primary alert—check it out!
-            </div>
+            {% include 'blog/tags/base_right.html' %}
         </div>
     </div>
 </div>

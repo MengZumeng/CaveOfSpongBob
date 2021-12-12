@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path,re_path,include
-from .views import IndexView,DetailView, CategoryView, TagView
+from .views import IndexView,DetailView, CategoryView, TagView,AboutView
 
 urlpatterns = [
     # re_path(r'^$', IndexView.as_view(), name='index'),  # 主页，自然排序
@@ -13,4 +13,5 @@ urlpatterns = [
     path('category/<slug:slug>/hot/', CategoryView.as_view(), {'sort': 'v'},name='category_hot'),
     path('tag/<slug:slug>/', TagView.as_view(), name='tag'),
     path('tag/<slug:slug>/hot/', TagView.as_view(), {'sort': 'v'}, name='tag_hot'),
+    path('about/', AboutView, name='about'),  # About页面
 ]

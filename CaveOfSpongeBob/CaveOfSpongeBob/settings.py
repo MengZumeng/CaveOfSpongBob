@@ -64,7 +64,7 @@ ROOT_URLCONF = 'CaveOfSpongeBob.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'blog.context_processors.settings_info',  # 自定义上下文管理器
             ],
         },
     },
@@ -157,3 +159,8 @@ SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,
 # 统一分页设置
 BASE_PAGE_BY = 2
 BASE_ORPHANS = int((BASE_PAGE_BY + 1) / 2)
+
+# 个性化设置，非必要信息
+# 个人 Github 地址
+MY_GITHUB = os.getenv('IZONE_GITHUB', 'https://github.com/MengZumeng')
+MY_CSDN = os.getenv('IZONE_HAO_URL', 'https://blog.csdn.net/weixin_44409075')

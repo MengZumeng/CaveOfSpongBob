@@ -9,5 +9,7 @@ def settings_info(request):
         'site_end_title':settings.SITE_END_TITLE,
         'site_description':settings.SITE_DESCRIPTION,
         'site_keywords':settings.SITE_KEYWORDS,
+        'my_github': settings.MY_GITHUB,
+        'my_csdn':settings.MY_CSDN,
     }
 

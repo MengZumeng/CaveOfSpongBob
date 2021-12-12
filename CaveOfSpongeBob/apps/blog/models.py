@@ -83,6 +83,7 @@ class Article(models.Model):
     update_date = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     views = models.IntegerField('阅览量', default=0)
     slug = models.SlugField(unique=True)
+    is_top = models.BooleanField('置顶', default=False)
 
     category = models.ForeignKey(Category, verbose_name='文章分类',on_delete=models.SET(''))
     tags = models.ManyToManyField(Tag, verbose_name='标签')
@@ -114,6 +115,24 @@ class Article(models.Model):
 
     def get_next(self):
         return Article.objects.filter(id__gt=self.id).order_by('id').first()
+
+class AboutBlog(models.Model):
+    body = models.TextField(verbose_name='About 内容')
+    create_date = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    update_date = models.DateTimeField(verbose_name='修改时间', auto_now=True)
+
+    class Meta:
+        verbose_name = 'About'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return 'About'
+
+    def body_to_markdown(self):
+        return markdown.markdown(self.body, extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+        ])
 
 # 时间线
 class Timeline(models.Model):
