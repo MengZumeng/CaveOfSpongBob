@@ -1,4 +1,4 @@
-from .models import Article, Tag, Category, Timeline, Silian,TestClass,AboutBlog
+from .models import Article, Tag, Category,TestClass,AboutBlog
 from django.views import generic
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render

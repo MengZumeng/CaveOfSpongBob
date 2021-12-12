@@ -134,51 +134,6 @@ class AboutBlog(models.Model):
             'markdown.extensions.codehilite',
         ])
 
-# 时间线
-class Timeline(models.Model):
-    COLOR_CHOICE = (
-        ('primary', '基本-蓝色'),
-        ('success', '成功-绿色'),
-        ('info', '信息-天蓝色'),
-        ('warning', '警告-橙色'),
-        ('danger', '危险-红色')
-    )
-    SIDE_CHOICE = (
-        ('L', '左边'),
-        ('R', '右边'),
-    )
-    STAR_NUM = (
-        (1,'1颗星'),
-        (2,'2颗星'),
-        (3,'3颗星'),
-        (4,'4颗星'),
-        (5,'5颗星'),
-    )
-    side = models.CharField('位置', max_length=1, choices=SIDE_CHOICE, default='L')
-    star_num = models.IntegerField('星星个数',choices=STAR_NUM,default=3)
-    icon = models.CharField('图标', max_length=50, default='glyphicon glyphicon-pencil')
-    icon_color = models.CharField('图标颜色', max_length=20, choices=COLOR_CHOICE, default='info')
-    title = models.CharField('标题', max_length=100)
-    update_date = models.DateTimeField('更新时间')
-    content = models.TextField('主要内容')
-
-    class Meta:
-        verbose_name = '时间线'
-        verbose_name_plural = verbose_name
-        ordering = ['update_date']
-
-    def __str__(self):
-        return self.title[:20]
-
-    def title_to_emoji(self):
-        return emoji.emojize(self.title,use_aliases=True)
-
-    def content_to_markdown(self):
-        # 先转换成emoji然后转换成markdown
-        to_emoji_content = emoji.emojize(self.content,use_aliases=True)
-        return markdown.markdown(to_emoji_content,
-                                 extensions=['markdown.extensions.extra',]
-                                 )
 
 # 幻灯片
 class Carousel(models.Model):
@@ -197,17 +152,4 @@ class Carousel(models.Model):
         return self.content[:25]
 
 
-# 死链
-class Silian(models.Model):
-    badurl = models.CharField('死链地址',max_length=200,help_text='注意：地址是以http开头的完整链接格式')
-    remark = models.CharField('死链说明',max_length=50,blank=True,null=True)
-    add_date = models.DateTimeField('提交日期',auto_now_add=True)
-
-    class Meta:
-        verbose_name = '死链'
-        verbose_name_plural = verbose_name
-        ordering = ['-add_date']
-
-    def __str__(self):
-        return self.badurl
 
