@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-hj!e5pcn2#3l7idcfve8ap-$@@)yw)*c+4&-r%pb%@##ed)q3#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,8 +87,13 @@ WSGI_APPLICATION = 'CaveOfSpongeBob.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': 'spongebob',   # 数据库名
+      'USER': 'spongebob',    # 数据库 用户名
+      'PASSWORD': 'Mzm123456',# 数据库 用户密码
+      'HOST': '127.0.0.1', # 数据库服务主机名
+      'PORT': '3306',      # 数据库服务端口
+      'CONN_MAX_AGE': 0
     }
 }
 
@@ -131,7 +136,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/' # 别名 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, r'apps\static'),
+    os.path.join(BASE_DIR,'apps','static'),
 )
 
 # 媒体文件收集
@@ -151,7 +156,7 @@ AUTH_USER_MODEL = 'myAuth.Myuser'
 
 # 网站默认设置和上下文信息
 DEFAULT_IMG_LINL = 'https://github.com/MengZumeng'
-SITE_END_TITLE = '网站名称待定'
+SITE_END_TITLE = '_个人博客'
 SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在Python学习、SEO优化、电子商务运营等方面的内容，网站所有文章都是原创。'
 SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,web开发,seo实战'
 
