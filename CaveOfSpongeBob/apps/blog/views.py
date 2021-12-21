@@ -3,6 +3,7 @@ from django.views import generic
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.utils.text import slugify
+from django.core.cache import cache
 from markdown.extensions.toc import TocExtension  # 锚点的拓展
 import markdown
 import time, datetime

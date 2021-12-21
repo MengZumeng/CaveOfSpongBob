@@ -302,3 +302,14 @@ body {
 }
 }
 
+
+/*About页面的图片*/
+.aboutPag img
+{
+        width:90%;
+        height:auto;
+}
+.aboutPag a
+{
+        color:  #0000FF
+}

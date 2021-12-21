@@ -156,9 +156,9 @@ AUTH_USER_MODEL = 'myAuth.Myuser'
 
 # 网站默认设置和上下文信息
 DEFAULT_IMG_LINL = 'https://github.com/MengZumeng'
-SITE_END_TITLE = '_个人博客'
-SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在Python学习、SEO优化、电子商务运营等方面的内容，网站所有文章都是原创。'
-SITE_KEYWORDS = 'Python爬虫实例,Django博客开发教程,个人博客网站,web开发,seo实战'
+SITE_END_TITLE = '-分享创造快乐'
+SITE_DESCRIPTION = '一个后端使用Django框架，前端使用Bootstrap4搭建的个人博客网站，主要分享博主在学习或工作中的内容，网站所有文章都是原创。'
+SITE_KEYWORDS = 'Django博客开发教程,个人博客网站,web开发,C++学习'
 
 
 # 统一分页设置
