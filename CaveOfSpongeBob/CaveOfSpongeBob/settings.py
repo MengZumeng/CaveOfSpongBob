@@ -162,7 +162,7 @@ SITE_KEYWORDS = 'Django博客开发教程,个人博客网站,web开发,C++学习
 
 
 # 统一分页设置
-BASE_PAGE_BY = 2
+BASE_PAGE_BY = 10
 BASE_ORPHANS = int((BASE_PAGE_BY + 1) / 2)
 
 # 个性化设置，非必要信息

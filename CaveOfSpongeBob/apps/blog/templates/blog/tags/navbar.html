@@ -16,6 +16,9 @@
                 {% url 'blog:about' as about_url %}
                 <a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}" href="{{ about_url }}"><i class="fa fa-anchor mr-1"></i>关于</a>
             </li>
+            <li class="nav-item mr-2 ">
+                <a class="nav-link py-md-3 " href="admin/"><i class="fa fa-paw mr-1"></i>管理后台</a>
+            </li>
         </ul>
     </div>
 </nav>
